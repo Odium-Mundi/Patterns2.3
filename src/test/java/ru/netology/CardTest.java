@@ -41,7 +41,7 @@ public class CardTest {
         $("[name='phone']").setValue(phone1);
         $(".checkbox__box").click();
         $(byText("Запланировать")).click();
-        $(withText("Перепланировать")).click();
+        $(withText("Успешно!")).waitUntil(Condition.visible, 15000);
     }
 
     @Test
