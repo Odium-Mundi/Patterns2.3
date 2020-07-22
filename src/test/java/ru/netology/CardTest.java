@@ -1,20 +1,13 @@
 package ru.netology;
 
 import com.codeborne.selenide.Condition;
-
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.*;
-
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.GeneratorFaker.*;
 
 public class CardTest {
@@ -32,7 +25,7 @@ public class CardTest {
 
 
     @Test
-    void shouldReservationCardWhenValidMinData() {
+    void validDate() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city1);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
@@ -45,7 +38,7 @@ public class CardTest {
     }
 
     @Test
-    void shouldReservationCardWhenValidMoreData() {
+    void validDatePlus55Days() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city1);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
@@ -58,7 +51,7 @@ public class CardTest {
     }
 
     @Test
-    void shouldReservationCardWhenInvalidLess3DaysData() {
+    void validDateMinus3Days() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city1);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
@@ -71,7 +64,7 @@ public class CardTest {
     }
 
     @Test
-    void shouldReservationCardWhenValidMinDataWithRandom() {
+    void validDateWithRandom() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
@@ -84,7 +77,7 @@ public class CardTest {
     }
 
     @Test
-    void shouldReservationCardWhenValidMoreDataWithRandom() {
+    void validDatePlus55WithRandom() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city1);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
@@ -97,7 +90,7 @@ public class CardTest {
     }
 
     @Test
-    void shouldReservationCardWhenInvalidLess3DaysDataWithRandom() {
+    void invalidDateWithRandom() {
         open("http://localhost:9999");
         $("[placeholder='Город']").setValue(city);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);

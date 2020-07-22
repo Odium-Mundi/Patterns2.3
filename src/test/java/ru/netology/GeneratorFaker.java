@@ -31,10 +31,8 @@ public class GeneratorFaker {
     }
 
     public static String getPhone() {
-        List<String> givenList = Arrays.asList("+79180000000", "+79181234567", "+79180654000", "+79188888888", "+79180808088", "+79186666666");
-        Random rand = new Random();
-        String randomElement = givenList.get(rand.nextInt(givenList.size()));
-        return randomElement;
+       Faker faker = new Faker(new Locale("ru"));
+       return faker.phoneNumber().phoneNumber();
     }
 
     public static String getDate(int days) {
