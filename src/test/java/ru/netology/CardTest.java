@@ -19,48 +19,33 @@ public class CardTest {
     private String date2 = getDate(-3);
     private String date3 = getDate(55);
 
-    private String name1 = "Роман Романов";
-    private String city1 = "Краснодар";
-    private String phone1 = "+79180000000";
-
 
     @Test
-    void validDate() {
+    void shouldReplanWhenClientExist() {
+
+        User user1 = new User(name, phone, city, date3);
+
         open("http://localhost:9999");
-        $("[placeholder='Город']").setValue(city1);
+        $("[placeholder='Город']").setValue(user1.city);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
-        $("[placeholder='Дата встречи'").setValue(date);
-        $("[data-test-id=\"name\"] .input__control").setValue(name1);
-        $("[name='phone']").setValue(phone1);
+        $("[placeholder='Дата встречи'").setValue(date3);
+        $("[data-test-id=\"name\"] .input__control").setValue(user1.name);
+        $("[name='phone']").setValue(user1.phone);
         $(".checkbox__box").click();
         $(byText("Запланировать")).click();
         $(withText("Успешно!")).waitUntil(Condition.visible, 15000);
-    }
 
-    @Test
-    void validDatePlus55Days() {
         open("http://localhost:9999");
-        $("[placeholder='Город']").setValue(city1);
+        $("[placeholder='Город']").setValue(user1.city);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
         $("[placeholder='Дата встречи'").setValue(date3);
-        $("[data-test-id=\"name\"] .input__control").setValue(name1);
-        $("[name='phone']").setValue(phone1);
+        $("[data-test-id=\"name\"] .input__control").setValue(user1.name);
+        $("[name='phone']").setValue(user1.phone);
         $(".checkbox__box").click();
         $(byText("Запланировать")).click();
         $(withText("Перепланировать")).click();
-    }
 
-    @Test
-    void validDateMinus3Days() {
-        open("http://localhost:9999");
-        $("[placeholder='Город']").setValue(city1);
-        $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
-        $("[placeholder='Дата встречи'").setValue(date2);
-        $("[data-test-id=\"name\"] .input__control").setValue(name1);
-        $("[name='phone']").setValue(phone1);
-        $(".checkbox__box").click();
-        $(byText("Запланировать")).click();
-        $(withText("Заказ на выбранную дату невозможен")).waitUntil(Condition.visible, 2000);
+
     }
 
     @Test
@@ -79,7 +64,7 @@ public class CardTest {
     @Test
     void validDatePlus55WithRandom() {
         open("http://localhost:9999");
-        $("[placeholder='Город']").setValue(city1);
+        $("[placeholder='Город']").setValue(city);
         $("[placeholder='Дата встречи'").sendKeys(Keys.LEFT_SHIFT, Keys.HOME, Keys.DELETE);
         $("[placeholder='Дата встречи'").setValue(date3);
         $("[data-test-id=\"name\"] .input__control").setValue(name);
