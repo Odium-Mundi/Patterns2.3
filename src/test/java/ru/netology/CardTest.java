@@ -3,6 +3,10 @@ package ru.netology;
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -11,6 +15,15 @@ import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.GeneratorFaker.*;
 
 public class CardTest {
+    @BeforeAll
+    static void setUpAll() {
+      SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+      SelenideLogger.removeListener("allure");
+    }
 
     private String city = getCity();
     private String name = getName();
